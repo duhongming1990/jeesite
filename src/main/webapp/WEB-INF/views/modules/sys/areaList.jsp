@@ -34,7 +34,7 @@
 	</ul>
 	<sys:message content="${message}"/>
 	<table id="treeTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th>区域名称</th><th>区域代码</th><th>邮政编码</th><th>区号</th><th>经度</th><th>维度</th>
+		<thead><tr><th>区域名称</th><th>区域代码</th><th>邮政编码</th><th>区号</th><th>经度</th><th>维度</th><th>区域类型</th>
 			<%--<shiro:hasPermission name="sys:area:edit"><th>操作</th></shiro:hasPermission>--%></tr></thead>
 		<tbody id="treeTableList"></tbody>
 	</table>
@@ -47,6 +47,7 @@
 			<td>{{row.cityCode}}</td>
 			<td>{{row.lng}}</td>
 			<td>{{row.lat}}</td>
+			<td>{{dict.type}}</td>
 			<%--<shiro:hasPermission name="sys:area:edit"><td>
 				<a href="${ctx}/sys/area/form?id={{row.id}}">修改</a>
 				<a href="${ctx}/sys/area/delete?id={{row.id}}" onclick="return confirmx('要删除该区域及所有子区域项吗？', this.href)">删除</a>

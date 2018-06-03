@@ -14,6 +14,7 @@ import com.thinkgem.jeesite.common.persistence.TreeEntity;
  */
 public class Area extends TreeEntity<Area> {
 	private static final long serialVersionUID = 1L;
+	private String mergerName;
 	private String areaCode; 	// 区域编码
 	private String zipCode;		// 邮政编码
 	private String cityCode;	// 区号
@@ -36,6 +37,14 @@ public class Area extends TreeEntity<Area> {
 
 	public void setParent(Area parent) {
 		this.parent = parent;
+	}
+
+	public String getMergerName() {
+		return mergerName;
+	}
+
+	public void setMergerName(String mergerName) {
+		this.mergerName = mergerName;
 	}
 
 	@Length(min=1, max=1)

@@ -8,6 +8,7 @@
 		a.parent_ids,
 		a.area_code,
 		a.name,
+		a.merger_name,
 		a.sort,
 		a.type,
 		a.remarks,
