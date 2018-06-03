@@ -50,7 +50,7 @@
 		<div class="control-group">
 			<label class="control-label">区域编码:</label>
 			<div class="controls">
-				<form:input path="code" htmlEscape="false" maxlength="50"/>
+				<form:input path="areaCode" htmlEscape="false" maxlength="50"/>
 			</div>
 		</div>
 		<div class="control-group">

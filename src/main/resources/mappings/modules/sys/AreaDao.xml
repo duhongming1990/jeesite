@@ -6,15 +6,17 @@
 		a.id,
 		a.parent_id AS "parent.id",
 		a.parent_ids,
-		a.code,
+		a.area_code,
 		a.name,
 		a.sort,
 		a.type,
 		a.remarks,
+		a.zip_code,
+		a.city_code,
+		a.lng,
+		a.lat,
 		a.create_by AS "createBy.id",
-		a.create_date,
 		a.update_by AS "updateBy.id",
-		a.update_date,
 		a.del_flag,
 		p.name AS "parent.name"
 	</sql>
@@ -26,7 +28,7 @@
 	<select id="get" resultType="Area">
 		SELECT
 			<include refid="areaColumns"/>
-		FROM sys_area a
+		FROM sys_cnarea a
 		<include refid="areaJoins"/>
 		WHERE a.id = #{id}
 	</select>
@@ -34,22 +36,24 @@
 	<select id="findList" resultType="Area">
 		SELECT
 			<include refid="areaColumns"/>
-		FROM sys_area a
+		FROM sys_cnarea a
 		<include refid="areaJoins"/>
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
 		<!-- 数据范围过滤 -->
 		${sqlMap.dsf}
 		OR a.id = #{currentUser.office.area.id}
-		ORDER BY a.code
+        AND 3 > level<!--由于中国5级行政区域有70多万条记录，故只保留3级行政区域即可（近4千条左右），其他更细的可以做web接口-->
+		ORDER BY a.id ASC
 	</select>
 	
 	<select id="findAllList" resultType="Area">
 		SELECT
 			<include refid="areaColumns"/>
-		FROM sys_area a
+		FROM sys_cnarea a
 		<include refid="areaJoins"/>
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
-		ORDER BY a.code
+        AND 3 > level<!--由于中国5级行政区域有70多万条记录，故只保留3级行政区域即可（近4千条左右），其他更细的可以做web接口-->
+		ORDER BY a.id ASC
 	</select>
 	
 	<select id="findByParentIdsLike" resultType="Area">
@@ -57,66 +61,61 @@
 			a.id,
 			a.parent_id AS "parent.id",
 			a.parent_ids
-		FROM sys_area a
+		FROM sys_cnarea a
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.parent_ids LIKE #{parentIds}
-		ORDER BY a.code
+		ORDER BY a.area_code
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO sys_area(
+		INSERT INTO sys_cnarea(
 			id, 
 			parent_id, 
 			parent_ids, 
-			code, 
+			area_code,
 			name, 
 			sort,
 			type, 
-			create_by, 
-			create_date, 
-			update_by, 
-			update_date, 
+			create_by,
+			update_by,
 			remarks, 
 			del_flag
 		) VALUES (
 			#{id}, 
 			#{parent.id}, 
 			#{parentIds}, 
-			#{code}, 
+			#{area_code},
 			#{name}, 
 			#{sort}, 
 			#{type}, 
-			#{createBy.id}, 
-			#{createDate}, 
-			#{updateBy.id}, 
-			#{updateDate}, 
+			#{createBy.id},
+			#{updateBy.id},
 			#{remarks}, 
 			#{delFlag}
 		)
 	</insert>
 	
 	<update id="update">
-		UPDATE sys_area SET 
+		UPDATE sys_cnarea SET
 			parent_id = #{parent.id}, 
 			parent_ids = #{parentIds}, 
-			code = #{code}, 
+			area_code = #{area_code},
 			name = #{name}, 
 			sort = #{sort}, 
 			type = #{type}, 
-			update_by = #{updateBy.id}, 
-			update_date = #{updateDate}, 
+			update_by = #{updateBy.id},
 			remarks = #{remarks}
 		WHERE id = #{id}
 	</update>
 	
 	<update id="updateParentIds">
-		UPDATE sys_area SET 
+		UPDATE sys_cnarea SET
 			parent_id = #{parent.id}, 
 			parent_ids = #{parentIds}
 		WHERE id = #{id}
 	</update>
 	
 	<update id="delete">
-		UPDATE sys_area SET 
+		UPDATE sys_cnarea SET
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id} OR parent_ids LIKE 
 					<if test="dbName == 'oracle'">'%,'||#{id}||',%'</if>
