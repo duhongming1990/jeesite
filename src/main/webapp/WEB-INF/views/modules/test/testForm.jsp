@@ -131,6 +131,15 @@
 				<input class="btn" type="button" value="客户端验证" onclick="top.$.jBox('iframe:${ctxStatic}/jquery-validation/1.11.0/demo/index.html',{title: '客户端验证',width: 950,height: 600,buttons: { '关闭': true }});"/>
 			</div>
 		</div>
+		<div class="control-group">
+			<label class="control-label">时间前控件:</label>
+			<div class="controls">
+				<span id="timeago"></span>
+				<script>
+					$("#timeago").html(timeago().format('2016-06-12', 'zh_CN'));
+				</script>
+			</div>
+		</div>
 		<div class="form-actions">
 			<shiro:hasPermission name="test:test:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
