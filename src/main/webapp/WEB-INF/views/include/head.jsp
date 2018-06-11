@@ -22,3 +22,4 @@
 
 <script src="${ctxStatic}/timeago/timeago.min.js"></script>
 <script src="${ctxStatic}/timeago/timeago.locales.min.js"></script>
+
