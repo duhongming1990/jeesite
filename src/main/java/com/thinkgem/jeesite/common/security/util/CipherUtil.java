@@ -250,7 +250,7 @@ public class CipherUtil {
 					byte[] e = encrpty(cipherAlgorithm, keyPair.getPublic().getEncoded(),dataString.getBytes());
 					log.info("非对称加密后数据： {}", NumberUtil.bytesToStrHex(e));
 					byte[] d = decrypt(cipherAlgorithm, keyPair.getPrivate().getEncoded(), e);
-					log.info("非解密后数据： {}", new String(d));
+					log.info("非对称解密后数据： {}", new String(d));
 				}
 			}
 		} catch (Exception e) {

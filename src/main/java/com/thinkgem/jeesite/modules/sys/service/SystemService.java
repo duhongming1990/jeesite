@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import com.thinkgem.jeesite.common.security.enums.EnumDigestAlgorithm;
+import com.thinkgem.jeesite.common.security.util.MessageDigestUtil;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.identity.Group;
 import org.apache.shiro.session.Session;
@@ -112,7 +114,7 @@ public class SystemService extends BaseService implements InitializingBean {
 
 	/**
 	 * 通过部门ID获取用户列表，仅返回用户id和name（树查询用户时用）
-	 * @param user
+	 * @param officeId
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -183,7 +185,7 @@ public class SystemService extends BaseService implements InitializingBean {
 	@Transactional(readOnly = false)
 	public void updatePasswordById(String id, String loginName, String newPassword) {
 		User user = new User(id);
-		user.setPassword(entryptPassword(newPassword));
+		user.setPassword(encryptPassword(newPassword));
 		userDao.updatePasswordById(user);
 		// 清除用户缓存
 		user.setLoginName(loginName);
@@ -206,10 +208,10 @@ public class SystemService extends BaseService implements InitializingBean {
 	/**
 	 * 生成安全的密码，生成随机的16位salt并经过1024次 sha-1 hash
 	 */
-	public static String entryptPassword(String plainPassword) {
+	public static String encryptPassword(String plainPassword) {
 		String plain = Encodes.unescapeHtml(plainPassword);
-		byte[] salt = Digests.generateSalt(SALT_SIZE);
-		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, HASH_INTERATIONS);
+		byte[] salt = MessageDigestUtil.generateSalt(SALT_SIZE);
+		byte[] hashPassword = MessageDigestUtil.encodeWithSaltIterations(EnumDigestAlgorithm.SHA1,plain.getBytes(), salt, HASH_INTERATIONS);
 		return Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);
 	}
 	
@@ -222,7 +224,7 @@ public class SystemService extends BaseService implements InitializingBean {
 	public static boolean validatePassword(String plainPassword, String password) {
 		String plain = Encodes.unescapeHtml(plainPassword);
 		byte[] salt = Encodes.decodeHex(password.substring(0,16));
-		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, HASH_INTERATIONS);
+		byte[] hashPassword = MessageDigestUtil.encodeWithSaltIterations(EnumDigestAlgorithm.SHA1,plain.getBytes(), salt, HASH_INTERATIONS);
 		return password.equals(Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword));
 	}
 	

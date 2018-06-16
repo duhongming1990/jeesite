@@ -46,8 +46,6 @@ public class CertificateUtil {
 	
 	/**
 	 * 证书所含公钥加密
-	 * @param certficateType 证书类型
-	 * @param certficatePath 证书路径
 	 * @param byteData 待加密数据
 	 * @return
 	 * @throws BadPaddingException 
@@ -66,8 +64,6 @@ public class CertificateUtil {
 	
 	/**
 	 * 证书所含公钥解密
-	 * @param certficateType 证书类型
-	 * @param certficatePath 证书路径
 	 * @param byteData 待解密数据
 	 * @return
 	 * @throws BadPaddingException 
@@ -85,8 +81,6 @@ public class CertificateUtil {
 	
 	/**
 	 * 证书所含公钥校验签名
-	 * @param certficateType 证书类型
-	 * @param certficatePath 证书路径
 	 * @param byteData 源数据
 	 * @param byteSign 签名
 	 * @throws NoSuchAlgorithmException 
