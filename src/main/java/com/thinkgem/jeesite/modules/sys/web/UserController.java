@@ -107,7 +107,7 @@ public class UserController extends BaseController {
 		user.setOffice(new Office(request.getParameter("office.id")));
 		// 如果新密码为空，则不更换密码
 		if (StringUtils.isNotBlank(user.getNewPassword())) {
-			user.setPassword(SystemService.entryptPassword(user.getNewPassword()));
+			user.setPassword(SystemService.encryptPassword(user.getNewPassword()));
 		}
 		if (!beanValidator(model, user)){
 			return form(user, model);
@@ -198,7 +198,7 @@ public class UserController extends BaseController {
 			for (User user : list){
 				try{
 					if ("true".equals(checkLoginName("", user.getLoginName()))){
-						user.setPassword(SystemService.entryptPassword("123456"));
+						user.setPassword(SystemService.encryptPassword("123456"));
 						BeanValidators.validateWithException(validator, user);
 						systemService.saveUser(user);
 						successNum++;

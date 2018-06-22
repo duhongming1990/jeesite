@@ -2,8 +2,8 @@ package com.thinkgem.jeesite.common.security.enums;
 
 public enum EnumCipherAlgorithm {
 
-//	DES_ECB_PKCS5Padding(EnumKeyAlgorithm.DES,"DES/ECB/PKCS5Padding"),
-//	DESede_ECB_PKCS5Padding(EnumKeyAlgorithm.DESede,"DESede/ECB/PKCS5Padding"),
+	DES_ECB_PKCS5Padding(EnumKeyAlgorithm.DES,"DES/ECB/PKCS5Padding"),
+	DESede_ECB_PKCS5Padding(EnumKeyAlgorithm.DESede,"DESede/ECB/PKCS5Padding"),
 	AES_ECB_PKCS5Padding(EnumKeyAlgorithm.AES,"AES/ECB/PKCS5Padding"),
 	IDEA_ECB_PKCS5Padding(EnumKeyAlgorithm.IDEA,"IDEA/ECB/PKCS5Padding"),
 	
