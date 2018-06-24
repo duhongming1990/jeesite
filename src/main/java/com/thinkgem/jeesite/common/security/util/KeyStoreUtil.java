@@ -115,10 +115,10 @@ public class KeyStoreUtil {
 	 * @throws InvalidKeyException 
 	 * @throws Exception
 	 */
-	public byte[] encrptyByPublicKey(String alias, byte[] byteData) 
+	public byte[] encrptyByPublicKey(String alias, byte[] byteData)
 			throws KeyStoreException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 		PublicKey publicKey = getPublicKey(alias);
-		return CipherUtil.encrpty(null, publicKey, byteData);
+		return CipherUtil.encrypt(null, publicKey, byteData);
 	}
 	
 	/**
@@ -136,10 +136,10 @@ public class KeyStoreUtil {
 	 * @throws InvalidKeyException 
 	 * @throws Exception
 	 */
-	public byte[] encrptyByPrivateKey(String alias,String keyPassword, byte[] byteData) 
+	public byte[] encrptyByPrivateKey(String alias,String keyPassword, byte[] byteData)
 			throws UnrecoverableKeyException, KeyStoreException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException{
 		PrivateKey privateKey = getPrivateKey(alias,keyPassword);
-		return CipherUtil.encrpty(null, privateKey, byteData);
+		return CipherUtil.encrypt(null, privateKey, byteData);
 	}
 	
 
