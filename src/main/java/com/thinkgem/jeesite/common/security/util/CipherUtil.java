@@ -10,13 +10,11 @@ import org.apache.commons.io.IOUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.*;
-import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
-import static sun.security.x509.X509CertInfo.KEY;
 
 
 /**
@@ -40,9 +38,9 @@ public class CipherUtil {
 	 * @throws IllegalBlockSizeException
 	 * @throws BadPaddingException
 	 */
-	public static byte[] encrpty(EnumCipherAlgorithm cipherAlgorithm, String strHexKey, byte[] byteData)
+	public static byte[] encrypt(EnumCipherAlgorithm cipherAlgorithm, String strHexKey, byte[] byteData)
 			throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-		return encrpty(cipherAlgorithm, NumberUtil.strHexToBytes(strHexKey), byteData);
+		return encrypt(cipherAlgorithm, NumberUtil.strHexToBytes(strHexKey), byteData);
 		
 	}
 	
@@ -58,7 +56,7 @@ public class CipherUtil {
 	 * @throws IllegalBlockSizeException
 	 * @throws BadPaddingException
 	 */
-	public static byte[] encrpty(EnumCipherAlgorithm cipherAlgorithm,  byte[] byteKey, byte[] byteData) 
+	public static byte[] encrypt(EnumCipherAlgorithm cipherAlgorithm,  byte[] byteKey, byte[] byteData)
 			throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 		Security.addProvider(new BouncyCastleProvider());
 		// 生成秘密密钥或公钥
@@ -100,7 +98,7 @@ public class CipherUtil {
 				break;
 		}
 
-		return encrpty(cipherAlgorithm, key, byteData);
+		return encrypt(cipherAlgorithm, key, byteData);
 	}
 	
 	/**
@@ -116,7 +114,7 @@ public class CipherUtil {
 	 * @throws IllegalBlockSizeException 
 	 * @throws Exception
 	 */
-	public static byte[] encrpty(EnumCipherAlgorithm cipherAlgorithm, Key key, byte[] byteData) 
+	public static byte[] encrypt(EnumCipherAlgorithm cipherAlgorithm, Key key, byte[] byteData)
 			throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		String algorithm = key.getAlgorithm();
 		if(cipherAlgorithm != null){
@@ -230,23 +228,36 @@ public class CipherUtil {
 	/**
 	 * DES加密
 	 * @param key
-	 * @param ciphertext
+	 * @param plaintext
 	 * @return
 	 */
-	public static String encodeDES(String key,String ciphertext){
+	public static String encodeDES(String key,String plaintext){
 		try{
-			SecureRandom random = new SecureRandom();
-			DESKeySpec desKey = new DESKeySpec(key.getBytes());
-			//创建一个密匙工厂，然后用它把DESKeySpec转换成
-			SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(EnumKeyAlgorithm.DES.name());
-			SecretKey securekey = keyFactory.generateSecret(desKey);
-			//Cipher对象实际完成加密操作
-			Cipher cipher = Cipher.getInstance(EnumKeyAlgorithm.DES.name());
-			//用密匙初始化Cipher对象
-			cipher.init(Cipher.ENCRYPT_MODE, securekey, random);
+			SecretKeySpec keyspec = new SecretKeySpec(key.getBytes(), EnumKeyAlgorithm.DES.name());
 			//现在，获取数据并加密
-			byte[] temp = Base64.encodeBase64(cipher.doFinal(ciphertext.getBytes()));
-			decrypt(EnumCipherAlgorithm.DES_ECB_PKCS5Padding,securekey,ciphertext.getBytes());
+            byte[] e = encrypt(EnumCipherAlgorithm.DES_ECB_PKCS5Padding,keyspec.getEncoded(),plaintext.getBytes());
+            //现在，获取数据并编码
+			byte[] temp = Base64.encodeBase64(e);
+			return IOUtils.toString(temp,"UTF-8");
+		}catch(Throwable e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * AES加密
+	 * @param key
+	 * @param plaintext
+	 * @return
+	 */
+	public static String encodeAES(String key,String plaintext){
+		try{
+			SecretKeySpec keyspec = new SecretKeySpec(key.getBytes(), EnumKeyAlgorithm.AES.name());
+			//现在，获取数据并加密
+			byte[] e = encrypt(EnumCipherAlgorithm.AES_ECB_PKCS5Padding,keyspec.getEncoded(),plaintext.getBytes());
+			//现在，获取数据并编码
+			byte[] temp = Base64.encodeBase64(e);
 			return IOUtils.toString(temp,"UTF-8");
 		}catch(Throwable e){
 			e.printStackTrace();
@@ -261,21 +272,39 @@ public class CipherUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String decodeDES(String key,String ciphertext) throws Exception {
-		// DES算法要求有一个可信任的随机数源
-		SecureRandom random = new SecureRandom();
-		// 创建一个DESKeySpec对象
-		DESKeySpec desKey = new DESKeySpec(key.getBytes());
-		// 创建一个密匙工厂
-		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(EnumKeyAlgorithm.DES.name());
-		// 将DESKeySpec对象转换成SecretKey对象
-		SecretKey securekey = keyFactory.generateSecret(desKey);
-		// Cipher对象实际完成解密操作
-		Cipher cipher = Cipher.getInstance(EnumKeyAlgorithm.DES.name());
-		// 用密匙初始化Cipher对象
-		cipher.init(Cipher.DECRYPT_MODE, securekey, random);
-		// 真正开始解密操作
-		return IOUtils.toString(cipher.doFinal(Base64.decodeBase64(ciphertext)),"UTF-8");
+	public static String decodeDES(String key,String ciphertext) {
+        try {
+			SecretKeySpec keyspec = new SecretKeySpec(key.getBytes(), EnumKeyAlgorithm.DES.name());
+            // 真正开始解码操作
+            byte[] temp = Base64.decodeBase64(ciphertext);
+            // 真正开始解密操作
+            byte[] e = decrypt(EnumCipherAlgorithm.DES_ECB_PKCS5Padding,keyspec.getEncoded(),temp);
+            return IOUtils.toString(e,"UTF-8");
+        }catch(Throwable e){
+            e.printStackTrace();
+            return null;
+        }
+	}
+
+	/**
+	 * AES解密
+	 * @param key
+	 * @param ciphertext
+	 * @return
+	 * @throws Exception
+	 */
+	public static String decodeAES(String key,String ciphertext) {
+		try {
+			SecretKeySpec keyspec = new SecretKeySpec(key.getBytes(), EnumKeyAlgorithm.AES.name());
+			// 真正开始解码操作
+			byte[] temp = Base64.decodeBase64(ciphertext);
+			// 真正开始解密操作
+			byte[] e = decrypt(EnumCipherAlgorithm.AES_ECB_PKCS5Padding,keyspec.getEncoded(),temp);
+			return IOUtils.toString(e,"UTF-8");
+		}catch(Throwable e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -294,7 +323,7 @@ public class CipherUtil {
                      */
 				    SecretKey secretKey = KeyUtil.generateKey(cipherAlgorithm.getKeyAlgorithm(), null);
 				    log.info("对称加密的密钥： {}",secretKey.getEncoded());
-					byte[] e = encrpty(cipherAlgorithm,NumberUtil.bytesToStrHex(secretKey.getEncoded()), dataString.getBytes());
+					byte[] e = encrypt(cipherAlgorithm,NumberUtil.bytesToStrHex(secretKey.getEncoded()), dataString.getBytes());
 					log.info("对称加密后数据： {}", NumberUtil.bytesToStrHex(e));
 					byte[] d = decrypt(cipherAlgorithm, secretKey.getEncoded(), e);
 					log.info("对称解密后数据： {}", new String(d));
@@ -305,7 +334,7 @@ public class CipherUtil {
                      */
 					KeyPair keyPair = KeyUtil.generateKeyPair(cipherAlgorithm.getKeyAlgorithm(), null);
 					log.info("非对称加密的公钥： {}\n非对称加密的私钥： {}",keyPair.getPublic().getEncoded(),keyPair.getPrivate().getEncoded());
-					byte[] e = encrpty(cipherAlgorithm, keyPair.getPublic().getEncoded(),dataString.getBytes());
+					byte[] e = encrypt(cipherAlgorithm, keyPair.getPublic().getEncoded(),dataString.getBytes());
 					log.info("非对称加密后数据： {}", NumberUtil.bytesToStrHex(e));
 					byte[] d = decrypt(cipherAlgorithm, keyPair.getPrivate().getEncoded(), e);
 					log.info("非对称解密后数据： {}", new String(d));
@@ -314,7 +343,12 @@ public class CipherUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		log.info(decodeDES("52ddqc1234567890","iDgKJpzE4E5+r+pH5tZM9ZJSGgTt5wT1"));
+		//DES的key长度为8位的字符串，否则会报错
+		log.info("前后台通用DES加密：{}",encodeDES("des@enc@","我有一个消息"));
+		log.info("前后台通用DES解密：{}",decodeDES("des@enc@","06tpmY+9V9mPI6AaHXO+IgeLDlDkWUbN"));
+		//AES的key长度为16位的字符串，否则会报错
+		log.info("前后台通用AES加密：{}",encodeAES("aes@encrypt@key@","我有一个消息"));
+		log.info("前后台通用AES加密：{}",decodeAES("aes@encrypt@key@","SFNUNGMqvMrMdP9+00Iov6BiefbHpN3e0KTMWo/nHtI="));
 	}
 
 }

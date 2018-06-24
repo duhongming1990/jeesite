@@ -58,7 +58,7 @@ public class CertificateUtil {
 	public  byte[] encrptyByPublicKey(byte[] byteData) 
 			throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException{
 		PublicKey publicKey = this.certificate.getPublicKey();
-		return CipherUtil.encrpty(null, publicKey, byteData);
+		return CipherUtil.encrypt(null, publicKey, byteData);
 	}
 	
 	
