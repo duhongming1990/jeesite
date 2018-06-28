@@ -1,4 +1,4 @@
-package com.thinkgem.jeesite.common.pattern;
+package com.thinkgem.jeesite.common.pattern.prototype;
 
 /**
  * @Author duhongming
