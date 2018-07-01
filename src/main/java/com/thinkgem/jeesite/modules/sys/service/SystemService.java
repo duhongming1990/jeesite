@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.persistence.Page;
-import com.thinkgem.jeesite.common.security.Digests;
 import com.thinkgem.jeesite.common.security.shiro.session.SessionDAO;
 import com.thinkgem.jeesite.common.service.BaseService;
 import com.thinkgem.jeesite.common.service.ServiceException;

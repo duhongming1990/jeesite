@@ -1,14 +1,13 @@
-package com.thinkgem.jeesite.common.pattern;
-
-import java.io.IOException;
+package com.thinkgem.jeesite.common.pattern.prototype;
 
 /**
  * @Author duhongming
  * @Email 19919902414@189.cn
  * @Date 2018/6/19 10:04
+ * 表明浅复制只会复制对象本身，里面封装的对象不会复制。
  */
 public class PrototypePatternTest {
-    public static void main(String[] args) throws CloneNotSupportedException, IOException, ClassNotFoundException {
+    public static void main(String[] args) throws CloneNotSupportedException{
 
         PrototypePattern prototype = new PrototypePattern();
 
