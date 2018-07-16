@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -98,17 +99,10 @@ public class Collections3 {
 	}
 
 	/**
-	 * 判断是否为空.
-	 */
-	public static boolean isEmpty(Collection collection) {
-		return (collection == null || collection.isEmpty());
-	}
-
-	/**
 	 * 取得Collection的第一个元素，如果collection为空返回null.
 	 */
 	public static <T> T getFirst(Collection<T> collection) {
-		if (isEmpty(collection)) {
+		if (CollectionUtils.isEmpty(collection)) {
 			return null;
 		}
 
@@ -119,7 +113,7 @@ public class Collections3 {
 	 * 获取Collection的最后一个元素 ，如果collection为空返回null.
 	 */
 	public static <T> T getLast(Collection<T> collection) {
-		if (isEmpty(collection)) {
+		if (CollectionUtils.isEmpty(collection)) {
 			return null;
 		}
 
