@@ -352,13 +352,13 @@ public class CipherUtil {
 		log.info("前后台通用DES解密：{}",decodeDES("des@enc@","06tpmY+9V9mPI6AaHXO+IgeLDlDkWUbN"));
 		//AES的key长度为16位的字符串，否则会报错
 		log.info("前后台通用AES加密：{}",encodeAES("aes@encrypt@key@","我有一个消息"));
-		log.info("前后台通用AES加密：{}",decodeAES("aes@encrypt@key@","SFNUNGMqvMrMdP9+00Iov6BiefbHpN3e0KTMWo/nHtI="));
+		log.info("前后台通用AES解密：{}",decodeAES("aes@encrypt@key@","SFNUNGMqvMrMdP9+00Iov6BiefbHpN3e0KTMWo/nHtI="));
 
 		//RSA每次加密后的数据都不一样
-		String e = ResEncrypt("duhongming");
-		log.info("非对称解密后数据： {}", e);
-		String d = ResDecrypt(e);
-		log.info("非对称解密后数据： {}", d);
+		String e = encryptRSA("duhongming");
+		log.info("前后台通用非对称加密： {}", e);
+		String d = decryptRSA(e);
+		log.info("前后台通用非对称解密： {}", d);
 	}
 
 	/**
@@ -369,7 +369,7 @@ public class CipherUtil {
 	private static RSAPublicKey loadPublicKeyByStr() throws Exception {
 		String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7rS78PJLTDLcHmF7bSUteQZB7joIyuCx3Z8T5A+KPbFQFPZmXMigDhM4vbzcfrUwcKq+c7X+wQPJ3Poi6VpCGnRbK8ts6+PIH8klS/UT/+LS9V+eEA0fBlD1MwQemJIYUhFbAvlGJ4IBubo9qjOaHJCPlBI93p3WMyp3N4GoONwIDAQAB";
 		try {
-			KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+			KeyFactory keyFactory = KeyFactory.getInstance(EnumCipherAlgorithm.RSA_ECB_PKCS1Padding.getKeyAlgorithm().name());
 			X509EncodedKeySpec keySpec = new X509EncodedKeySpec(Base64.decodeBase64(publicKey));
 			return (RSAPublicKey) keyFactory.generatePublic(keySpec);
 		} catch (NoSuchAlgorithmException e) {
@@ -390,7 +390,7 @@ public class CipherUtil {
 		String privateKey = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBALutLvw8ktMMtweYXttJS15BkHuOgjK4LHdnxPkD4o9sVAU9mZcyKAOEzi9vNx+tTBwqr5ztf7BA8nc+iLpWkIadFsry2zr48gfySVL9RP/4tL1X54QDR8GUPUzBB6YkhhSEVsC+UYnggG5uj2qM5ockI+UEj3endYzKnc3gag43AgMBAAECgYA427QDaRqWZCDDZU8/okn6KWTrefZKBXA7UK3lP18RUqF14P66RtDGmCKbTldl+mu3kNsZcP6hWFvc8o4b3gP0r5nlW+12Xp6qwg7Ayx7QnvujytnZKu3ijRQhYTXKa9EDbUnPQSMdvBmdnij+QwXGxCiQr90wXslkawNB/GfjIQJBAOKOC4Mi4NWhZptNTZE+4YQcdwM7d8z3PYqv9yGvgym9aPz6EfMX9R4RMBILIjSlNAuRtb+O+zJmfcLWr4Kr7YcCQQDUEZLq4YRjiXJpPCsL+PiQamPF64w/TPNzSF/NzBr3Brkj7/iLk/QANy+3oIbaJMFf7qIEFbf8nGuPyEq8qoXRAkEAjKorRbG7LYk3/wchOSR0uyU9U7lxqcZ85IZbCAREiP78l83gpTHj1FZRpXJaO5uzU9eVpClvmByAyx+m+5gqMwJBAIUpg9d5RGg8JltuLJmX/HyyUXQ2NBqLd1MsXvwa7dOvpRGr3aXHga+g95WWdxcDfWl/rrxh5uX4UpI2creFXAECQQDZVivHFIE1oU7ayXvICgNp72gmwZPWoKyY8coJ7lw200YYMRfP/ZaYDh1dSCsRAQW7RCyibyxNtikgHkwlvp6b";
 		try {
 			PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Base64.decodeBase64(privateKey.getBytes()));
-			KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+			KeyFactory keyFactory = KeyFactory.getInstance(EnumCipherAlgorithm.RSA_ECB_PKCS1Padding.getKeyAlgorithm().name());
 			return (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
 		} catch (NoSuchAlgorithmException e) {
 			throw new Exception("无此算法");
@@ -407,11 +407,11 @@ public class CipherUtil {
 	 * @return
 	 * @throws Exception 加密过程中的异常信息
 	 */
-	public static String ResEncrypt(String plainTextData) throws Exception {
+	public static String encryptRSA(String plainTextData) throws Exception {
 		Cipher cipher = null;
 		try {
 			// 使用默认RSA
-			cipher = Cipher.getInstance("RSA");
+			cipher = Cipher.getInstance(EnumCipherAlgorithm.RSA_ECB_PKCS1Padding.getKeyAlgorithm().name());
 			// cipher= Cipher.getInstance("RSA", new BouncyCastleProvider());
 			cipher.init(Cipher.ENCRYPT_MODE, loadPublicKeyByStr());
 			byte[] byteContent = plainTextData.getBytes("utf-8");
@@ -437,11 +437,11 @@ public class CipherUtil {
 	 * @return 明文
 	 * @throws Exception 解密过程中的异常信息
 	 */
-	public static String ResDecrypt(String cipherData) throws Exception {
+	public static String decryptRSA(String cipherData) throws Exception {
 		Cipher cipher = null;
 		try {
 			// 使用默认RSA
-			cipher = Cipher.getInstance("RSA");
+			cipher = Cipher.getInstance(EnumCipherAlgorithm.RSA_ECB_PKCS1Padding.getKeyAlgorithm().name());
 			cipher.init(Cipher.DECRYPT_MODE, loadPrivateKeyByStr());
 			byte[] byteContent = Base64.decodeBase64(cipherData.getBytes());
 			StringBuilder sb = new StringBuilder();

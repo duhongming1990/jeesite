@@ -41,6 +41,7 @@ public class Article extends DataEntity<Article> {
    	private String viewConfig;	// 视图参数
 
 	private ArticleData articleData;	//文章副表
+	private String editorValue;		//ueditor字段
 	
 	private Date beginDate;	// 开始时间
 	private Date endDate;	// 结束时间
@@ -234,7 +235,14 @@ public class Article extends DataEntity<Article> {
    	public String getImageSrc() {
         return CmsUtils.formatImageSrcToWeb(this.image);
    	}
-	
+
+	public String getEditorValue() {
+		return editorValue;
+	}
+
+	public void setEditorValue(String editorValue) {
+		this.editorValue = editorValue;
+	}
 }
 
 

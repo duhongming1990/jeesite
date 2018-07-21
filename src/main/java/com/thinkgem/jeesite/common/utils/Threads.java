@@ -3,7 +3,12 @@
  */
 package com.thinkgem.jeesite.common.utils;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
+
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -12,6 +17,19 @@ import java.util.concurrent.TimeUnit;
  * @version 2013-01-15
  */
 public class Threads {
+
+	/**
+	 * 创建线程工厂
+	 * @param nameFormat
+	 * @return
+	 * @Description:
+	 */
+	public static ThreadFactory createThreadFactory(String nameFormat){
+		return new BasicThreadFactory
+				.Builder()
+				.namingPattern(nameFormat + "-%d")
+				.build();
+	}
 
 	/**
 	 * sleep等待,单位为毫秒,忽略InterruptedException.
