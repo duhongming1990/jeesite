@@ -18,12 +18,7 @@ public class ExecutorRouteLFU implements ExecutorRouteStrategy{
             }
         }
         List<Map.Entry<String,Integer>> itemList = new ArrayList<>(lfuItemMap.entrySet());
-        Collections.sort(itemList, new Comparator<Map.Entry<String, Integer>>() {
-            @Override
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
+        Collections.sort(itemList, Comparator.comparing(Map.Entry::getValue));
         Map.Entry<String, Integer> itemMap = itemList.get(0);
         itemMap.setValue(itemMap.getValue()+1);
         return itemMap.getKey();

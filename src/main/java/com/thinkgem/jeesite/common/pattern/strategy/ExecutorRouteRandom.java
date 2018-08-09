@@ -1,5 +1,6 @@
 package com.thinkgem.jeesite.common.pattern.strategy;
 
+import com.thinkgem.jeesite.common.utils.StringUtils;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.List;
@@ -15,8 +16,8 @@ public class ExecutorRouteRandom implements ExecutorRouteStrategy {
     @Override
     public String selectRouteRun(List<String> addressList) {
         if(CollectionUtils.isNotEmpty(addressList)){
-            addressList.get(random.nextInt(addressList.size()));
+            return addressList.get(random.nextInt(addressList.size()));
         }
-        return null;
+        return StringUtils.EMPTY;
     }
 }

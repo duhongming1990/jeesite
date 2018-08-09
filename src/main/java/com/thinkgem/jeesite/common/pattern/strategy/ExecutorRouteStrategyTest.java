@@ -11,7 +11,7 @@ import java.util.List;
 public class ExecutorRouteStrategyTest {
     public static void main(String[] args) {
 
-        ExecutorRouteStrategy executorRouteStrategy = ExecutorRouteStrategyEnum.LRU.getRouteStrategy();
+        ExecutorRouteStrategy executorRouteStrategy = ExecutorRouteStrategyEnum.ROUND.getRouteStrategy();
 
         List<String> addressList = Lists.newArrayList();
         for(int i=1 ; i<=100;i++){
