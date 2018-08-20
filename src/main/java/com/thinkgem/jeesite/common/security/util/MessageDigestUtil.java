@@ -75,6 +75,10 @@ public class MessageDigestUtil {
 			byte[] md = encode(digestAlgorithm, dataString.getBytes());
 			log.info("{},摘要信息: {}", digestAlgorithm.getValue(), NumberUtil.bytesToStrHex(md));
 		}
+
+
+		log.info("前后台通用MD5摘要信息: {}",NumberUtil.bytesToStrHex(encode(EnumDigestAlgorithm.MD5, "消息摘要".getBytes())));
+		log.info("前后台通用SHA256摘要信息: {}",NumberUtil.bytesToStrHex(encode(EnumDigestAlgorithm.SHA256, "消息摘要".getBytes())));
 	
 	}
 }

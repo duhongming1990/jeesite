@@ -6,10 +6,13 @@
     <script src="bin/jsencrypt.js"></script>
 </head>
 <body>
+    打开Console看吧！
     <script type="text/javascript">
-        var rsa_enc_data = rsaEncrypt("duhongming");
-        console.log(rsa_enc_data);
-        console.log(rsaDecrypt(rsa_enc_data));
+
+        var rsa_enc_data = rsaEncrypt('我有一个消息');
+        console.log("RSA加密内容："+rsa_enc_data);
+        console.log("RSA解密内容："+rsaDecrypt(rsa_enc_data));
+
         function rsaEncrypt(data) {
             var key ="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7rS78PJLTDLcHmF7bSUteQZB7joIyuCx3Z8T5A+KPbFQFPZmXMigDhM4vbzcfrUwcKq+c7X+wQPJ3Poi6VpCGnRbK8ts6+PIH8klS/UT/+LS9V+eEA0fBlD1MwQemJIYUhFbAvlGJ4IBubo9qjOaHJCPlBI93p3WMyp3N4GoONwIDAQAB";
             var encrypt = new JSEncrypt(key);
@@ -23,6 +26,7 @@
             encrypt.setPrivateKey(key);
             return encrypt.decrypt(data);
         }
+
     </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.thinkgem.jeesite.common.security.util;
 
 
+import com.thinkgem.jeesite.common.security.enums.EnumAuthCodeAlgorithm;
 import com.thinkgem.jeesite.common.security.enums.EnumKeyAlgorithm;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -16,6 +17,12 @@ import java.security.spec.EllipticCurve;
 
 
 public class KeyUtil {
+
+	public static SecretKey generateKey(EnumAuthCodeAlgorithm authCodeAlgorithm) throws NoSuchAlgorithmException {
+		KeyGenerator keyGen = KeyGenerator.getInstance(authCodeAlgorithm.name());
+		return keyGen.generateKey();
+	}
+
 	public static SecretKey generateKey(EnumKeyAlgorithm keyAlgorithm, Integer keySize) throws NoSuchAlgorithmException{
 		Security.addProvider(new BouncyCastleProvider());
 		KeyGenerator keyGen = KeyGenerator.getInstance(keyAlgorithm.name());
@@ -79,5 +86,4 @@ public class KeyUtil {
 		}
 	
 	}
-
 }

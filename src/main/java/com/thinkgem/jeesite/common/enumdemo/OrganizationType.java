@@ -9,7 +9,7 @@ package com.thinkgem.jeesite.common.enumdemo;
 public class OrganizationType {
 
     /**
-     * 企业类型
+     * 组织机构类型
      */
     public enum TYPE{
 

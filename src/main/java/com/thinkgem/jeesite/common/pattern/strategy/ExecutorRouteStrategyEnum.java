@@ -11,7 +11,10 @@ public enum ExecutorRouteStrategyEnum {
     LAST("最后一个",new ExecutorRouteLast()),
     LFU("最不经常使用",new ExecutorRouteLFU()),
     LRU("最近最久未使用",new ExecutorRouteLRU()),
-    RANDOM("随机",new ExecutorRouteRandom());
+    RANDOM("随机",new ExecutorRouteRandom()),
+    ROUND("轮询",new ExecutorRouteRound()),
+    BUSYOVER("繁忙转移",new ExecutorRouteBusyover()),
+    FAILOVER("故障转移",new ExecutorRouteFailover());
 
     private String title;
     private ExecutorRouteStrategy routeStrategy;
