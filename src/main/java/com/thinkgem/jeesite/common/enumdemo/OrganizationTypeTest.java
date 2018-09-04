@@ -25,9 +25,5 @@ public class OrganizationTypeTest {
 
         System.out.println("叶子节点:");
         OrganizationType.OU_IS_LEAF.show();
-
-        String s = String.format("%010d", 10);
-        System.out.println(s);
-
     }
 }

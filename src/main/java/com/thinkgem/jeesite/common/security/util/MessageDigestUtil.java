@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.Validate;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
+import java.io.*;
 import java.security.*;
 
 
@@ -64,7 +65,7 @@ public class MessageDigestUtil {
 		return bytes;
 	}
 
-	public static void main(String[] args) throws NoSuchAlgorithmException {
+	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
 		String dataString = "ZGL";
 		/**
 		 *
@@ -73,12 +74,40 @@ public class MessageDigestUtil {
 		 */
 		for (EnumDigestAlgorithm digestAlgorithm : EnumDigestAlgorithm.values()) {
 			byte[] md = encode(digestAlgorithm, dataString.getBytes());
-			log.info("{},摘要信息: {}", digestAlgorithm.getValue(), NumberUtil.bytesToStrHex(md));
+			log.info("{},文本摘要信息: {}", digestAlgorithm.getValue(), NumberUtil.bytesToStrHex(md));
 		}
 
 
 		log.info("前后台通用MD5摘要信息: {}",NumberUtil.bytesToStrHex(encode(EnumDigestAlgorithm.MD5, "消息摘要".getBytes())));
 		log.info("前后台通用SHA256摘要信息: {}",NumberUtil.bytesToStrHex(encode(EnumDigestAlgorithm.SHA256, "消息摘要".getBytes())));
+
+		byte[] bytes = new MessageDigestUtil().inputStream2ByteArray("E:\\personal-software-auto\\Hadoop\\1.Hadoop\\hadoop-3.1.1.tar.gz");
+
+		//文件指纹
+		for (EnumDigestAlgorithm digestAlgorithm : EnumDigestAlgorithm.values()) {
+			byte[] md = encode(digestAlgorithm,bytes);
+			log.info("{},文件摘要信息: {}", digestAlgorithm.getValue(),NumberUtil.bytesToStrHex(md));
+		}
 	
+	}
+
+	private byte[] inputStream2ByteArray(String filePath) throws IOException {
+
+		InputStream in = new FileInputStream(filePath);
+		byte[] data = toByteArray(in);
+		in.close();
+
+		return data;
+	}
+
+	private byte[] toByteArray(InputStream in) throws IOException {
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024 * 4];
+		int n = 0;
+		while ((n = in.read(buffer)) != -1) {
+			out.write(buffer, 0, n);
+		}
+		return out.toByteArray();
 	}
 }

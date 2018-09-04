@@ -33,12 +33,13 @@ public class BeanValidators {
 	 * 调用JSR303的validate方法, 验证失败时抛出ConstraintViolationException.
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void validateWithException(Validator validator, Object object, Class<?>... groups)
+	public static Set<ConstraintViolation> validateWithException(Validator validator, Object object, Class<?>... groups)
 			throws ConstraintViolationException {
 		Set constraintViolations = validator.validate(object, groups);
 		if (!constraintViolations.isEmpty()) {
 			throw new ConstraintViolationException(constraintViolations);
 		}
+		return null;
 	}
 
 	/**
