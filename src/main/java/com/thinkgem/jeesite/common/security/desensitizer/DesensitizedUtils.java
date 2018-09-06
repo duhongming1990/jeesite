@@ -157,6 +157,8 @@ public class DesensitizedUtils<T> {
                             break;
                         }
                     }
+                }else{
+                    isDesensitized = true;
                 }
                 if(isDesensitized){
                     field.set(javaBean, annotation.type().getDesensitizedType().setDesensitizedStr(valueStr).desensitized());
