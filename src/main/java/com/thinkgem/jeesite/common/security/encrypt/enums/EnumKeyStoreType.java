@@ -1,4 +1,4 @@
-package com.thinkgem.jeesite.common.security.enums;
+package com.thinkgem.jeesite.common.security.encrypt.enums;
 
 public enum EnumKeyStoreType {
 	JKS("JKS"),PKCS12("PKCS12");

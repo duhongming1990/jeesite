@@ -1,7 +1,7 @@
-package com.thinkgem.jeesite.common.security.util;
+package com.thinkgem.jeesite.common.security.encrypt.util;
 
 
-import com.thinkgem.jeesite.common.security.enums.EnumDigestAlgorithm;
+import com.thinkgem.jeesite.common.security.encrypt.enums.EnumDigestAlgorithm;
 import com.thinkgem.jeesite.common.utils.Exceptions;
 import com.thinkgem.jeesite.common.utils.NumberUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -82,8 +82,7 @@ public class MessageDigestUtil {
 		log.info("前后台通用SHA256摘要信息: {}",NumberUtil.bytesToStrHex(encode(EnumDigestAlgorithm.SHA256, "消息摘要".getBytes())));
 
 		byte[] bytes = new MessageDigestUtil().inputStream2ByteArray("E:\\personal-software-auto\\Hadoop\\1.Hadoop\\hadoop-3.1.1.tar.gz");
-
-		//文件指纹
+		//文件指纹，参见文件hadoop-3.1.1.tar.gz.mds.txt
 		for (EnumDigestAlgorithm digestAlgorithm : EnumDigestAlgorithm.values()) {
 			byte[] md = encode(digestAlgorithm,bytes);
 			log.info("{},文件摘要信息: {}", digestAlgorithm.getValue(),NumberUtil.bytesToStrHex(md));

@@ -1,7 +1,7 @@
-package com.thinkgem.jeesite.common.security.util;
+package com.thinkgem.jeesite.common.security.encrypt.util;
 
 
-import com.thinkgem.jeesite.common.security.enums.EnumSignatureAlgorithm;
+import com.thinkgem.jeesite.common.security.encrypt.enums.EnumSignatureAlgorithm;
 import com.thinkgem.jeesite.common.utils.NumberUtil;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 

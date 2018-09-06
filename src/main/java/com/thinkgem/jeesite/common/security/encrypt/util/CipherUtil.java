@@ -1,8 +1,8 @@
-package com.thinkgem.jeesite.common.security.util;
+package com.thinkgem.jeesite.common.security.encrypt.util;
 
 
-import com.thinkgem.jeesite.common.security.enums.EnumCipherAlgorithm;
-import com.thinkgem.jeesite.common.security.enums.EnumKeyAlgorithm;
+import com.thinkgem.jeesite.common.security.encrypt.enums.EnumCipherAlgorithm;
+import com.thinkgem.jeesite.common.security.encrypt.enums.EnumKeyAlgorithm;
 import com.thinkgem.jeesite.common.utils.NumberUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;

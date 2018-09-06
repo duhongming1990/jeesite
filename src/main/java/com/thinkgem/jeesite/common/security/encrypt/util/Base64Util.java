@@ -1,4 +1,4 @@
-package com.thinkgem.jeesite.common.security.util;
+package com.thinkgem.jeesite.common.security.encrypt.util;
 
 import org.bouncycastle.util.encoders.Base64;
 import com.thinkgem.jeesite.common.utils.EncodingUtil;

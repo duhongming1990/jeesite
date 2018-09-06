@@ -1,4 +1,4 @@
-package com.thinkgem.jeesite.common.security.enums;
+package com.thinkgem.jeesite.common.security.encrypt.enums;
 
 public enum EnumSignatureAlgorithm {
 	MD2withRSA(EnumKeyAlgorithm.RSA),

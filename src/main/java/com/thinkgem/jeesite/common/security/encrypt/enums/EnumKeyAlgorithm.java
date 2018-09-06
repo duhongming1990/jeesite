@@ -1,4 +1,4 @@
-package com.thinkgem.jeesite.common.security.enums;
+package com.thinkgem.jeesite.common.security.encrypt.enums;
 
 import java.util.ArrayList;
 import java.util.List;

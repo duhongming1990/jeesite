@@ -1,8 +1,8 @@
-package com.thinkgem.jeesite.common.security.util;
+package com.thinkgem.jeesite.common.security.encrypt.util;
 
 
-import com.thinkgem.jeesite.common.security.enums.EnumAuthCodeAlgorithm;
-import com.thinkgem.jeesite.common.security.enums.EnumKeyAlgorithm;
+import com.thinkgem.jeesite.common.security.encrypt.enums.EnumAuthCodeAlgorithm;
+import com.thinkgem.jeesite.common.security.encrypt.enums.EnumKeyAlgorithm;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.KeyGenerator;

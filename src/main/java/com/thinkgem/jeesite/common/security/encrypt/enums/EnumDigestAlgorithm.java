@@ -1,4 +1,4 @@
-package com.thinkgem.jeesite.common.security.enums;
+package com.thinkgem.jeesite.common.security.encrypt.enums;
 
 public enum EnumDigestAlgorithm {
 	MD2("MD2"),

@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import com.thinkgem.jeesite.common.security.enums.EnumDigestAlgorithm;
-import com.thinkgem.jeesite.common.security.util.MessageDigestUtil;
+import com.thinkgem.jeesite.common.security.encrypt.enums.EnumDigestAlgorithm;
+import com.thinkgem.jeesite.common.security.encrypt.util.MessageDigestUtil;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.identity.Group;
 import org.apache.shiro.session.Session;

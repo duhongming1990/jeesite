@@ -1,7 +1,7 @@
-package com.thinkgem.jeesite.common.security.util;
+package com.thinkgem.jeesite.common.security.encrypt.util;
 
 
-import com.thinkgem.jeesite.common.security.enums.EnumKeyStoreType;
+import com.thinkgem.jeesite.common.security.encrypt.enums.EnumKeyStoreType;
 import com.thinkgem.jeesite.common.utils.IOUtil;
 import com.thinkgem.jeesite.common.utils.NumberUtil;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
