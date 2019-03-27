@@ -8,5 +8,6 @@ package com.thinkgem.jeesite.common.enumdemo;
 public class CommonExceptionsTest {
     public static void main(String[] args) {
         CommonExceptions.UserCommonException.show();
+        throw CommonExceptions.UserCommonException.CUST_NOT_REGISTER.getCommonException();
     }
 }

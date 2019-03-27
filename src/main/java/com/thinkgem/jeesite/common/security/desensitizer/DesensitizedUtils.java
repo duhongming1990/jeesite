@@ -163,40 +163,6 @@ public class DesensitizedUtils<T> {
                 if(isDesensitized){
                     field.set(javaBean, annotation.type().getDesensitizedType().setDesensitizedStr(valueStr).desensitized());
                 }
-//                switch (annotation.type()) {
-//                    case CHINESE_NAME: {
-//                        field.set(javaBean, DesensitizedUtils.chineseName(valueStr));
-//                        break;
-//                    }
-//                    case ID_CARD: {
-//                        field.set(javaBean, DesensitizedUtils.idCardNum(valueStr));
-//                        break;
-//                    }
-//                    case FIXED_PHONE: {
-//                        field.set(javaBean, DesensitizedUtils.fixedPhone(valueStr));
-//                        break;
-//                    }
-//                    case MOBILE_PHONE: {
-//                        field.set(javaBean, DesensitizedUtils.mobilePhone(valueStr));
-//                        break;
-//                    }
-//                    case ADDRESS: {
-//                        field.set(javaBean, DesensitizedUtils.address(valueStr, 8));
-//                        break;
-//                    }
-//                    case EMAIL: {
-//                        field.set(javaBean, DesensitizedUtils.email(valueStr));
-//                        break;
-//                    }
-//                    case BANK_CARD: {
-//                        field.set(javaBean, DesensitizedUtils.bankCard(valueStr));
-//                        break;
-//                    }
-//                    case PASSWORD: {
-//                        field.set(javaBean, DesensitizedUtils.password(valueStr));
-//                        break;
-//                    }
-//                }
             }
         }
     }

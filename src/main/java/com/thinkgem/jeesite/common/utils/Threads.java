@@ -3,6 +3,7 @@
  */
 package com.thinkgem.jeesite.common.utils;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import java.util.concurrent.ExecutorService;
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class Threads {
 
 	/**
+	 * commons-lang3包
 	 * 创建线程工厂
 	 * @param nameFormat
 	 * @return
@@ -25,6 +27,18 @@ public class Threads {
 	public static ThreadFactory createThreadFactory(String nameFormat){
 		return new BasicThreadFactory.Builder()
 				.namingPattern(nameFormat + "-%d")
+				.build();
+	}
+
+	/**
+	 * guava包
+	 * 创建线程工厂
+	 * @param nameFormat
+	 * @return
+	 */
+	public static ThreadFactory newThreadFactory(String nameFormat){
+		return new ThreadFactoryBuilder()
+				.setNameFormat(nameFormat + "-%d")
 				.build();
 	}
 
