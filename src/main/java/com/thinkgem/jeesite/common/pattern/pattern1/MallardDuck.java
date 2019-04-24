@@ -1,7 +1,7 @@
 package com.thinkgem.jeesite.common.pattern.pattern1;
 
-import com.thinkgem.jeesite.common.pattern.pattern1.behavior.imple.FlyWithWings;
-import com.thinkgem.jeesite.common.pattern.pattern1.behavior.imple.Quack;
+import com.thinkgem.jeesite.common.pattern.pattern1.behavior.impl.FlyWithWings;
+import com.thinkgem.jeesite.common.pattern.pattern1.behavior.impl.Quack;
 
 public class MallardDuck extends Duck{
 

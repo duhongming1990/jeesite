@@ -1,8 +1,8 @@
 package com.thinkgem.jeesite.common.pattern.pattern1;
 
-import com.thinkgem.jeesite.common.pattern.pattern1.behavior.imple.FlyNoWay;
-import com.thinkgem.jeesite.common.pattern.pattern1.behavior.imple.FlyRocketPowered;
-import com.thinkgem.jeesite.common.pattern.pattern1.behavior.imple.Quack;
+import com.thinkgem.jeesite.common.pattern.pattern1.behavior.impl.FlyNoWay;
+import com.thinkgem.jeesite.common.pattern.pattern1.behavior.impl.FlyRocketPowered;
+import com.thinkgem.jeesite.common.pattern.pattern1.behavior.impl.Quack;
 
 public class ModelDuck extends Duck {
 

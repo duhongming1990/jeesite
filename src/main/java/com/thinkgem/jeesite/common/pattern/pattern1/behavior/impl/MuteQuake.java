@@ -1,4 +1,4 @@
-package com.thinkgem.jeesite.common.pattern.pattern1.behavior.imple;
+package com.thinkgem.jeesite.common.pattern.pattern1.behavior.impl;
 
 import com.thinkgem.jeesite.common.pattern.pattern1.behavior.QuackBehavior;
 
