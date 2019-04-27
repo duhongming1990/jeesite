@@ -3,18 +3,17 @@
  */
 package com.thinkgem.jeesite.modules.sys.utils;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.utils.CacheUtils;
 import com.thinkgem.jeesite.common.utils.SpringContextHolder;
 import com.thinkgem.jeesite.modules.sys.dao.DictDao;
 import com.thinkgem.jeesite.modules.sys.entity.Dict;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 字典工具类
@@ -64,15 +63,9 @@ public class DictUtils {
 		@SuppressWarnings("unchecked")
 		Map<String, List<Dict>> dictMap = (Map<String, List<Dict>>)CacheUtils.get(CACHE_DICT_MAP);
 		if (dictMap==null){
-			dictMap = Maps.newHashMap();
-			for (Dict dict : dictDao.findAllList(new Dict())){
-				List<Dict> dictList = dictMap.get(dict.getType());
-				if (dictList != null){
-					dictList.add(dict);
-				}else{
-					dictMap.put(dict.getType(), Lists.newArrayList(dict));
-				}
-			}
+			//Lambda分组的威力
+			List<Dict> dicts = dictDao.findAllList(new Dict());
+			dictMap = dicts.parallelStream().collect(Collectors.groupingBy(Dict::getType));
 			CacheUtils.put(CACHE_DICT_MAP, dictMap);
 		}
 		List<Dict> dictList = dictMap.get(type);
