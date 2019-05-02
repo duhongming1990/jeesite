@@ -1,22 +1,30 @@
 package com.thinkgem.jeesite.common.pattern.pattern1;
 
+import com.thinkgem.jeesite.common.pattern.pattern1.behavior.impl.FlyNoWay;
+import com.thinkgem.jeesite.common.pattern.pattern1.behavior.impl.Squeak;
+
+/**
+ * @Author duhongming
+ * @Email duhm@mydubang.com
+ * @Date 2019/5/2 20:34
+ * @Description
+ */
 public class RubberDuck extends Duck {
-    public void quack() {
 
+    public RubberDuck() {
+        super();
+        super.setFlyBehavior(new FlyNoWay());
+        super.setQuackBehavior(new Squeak());
     }
 
-    public void swim() {
-
-    }
-
+    @Override
     public void display() {
         System.out.println("外观是橡皮鸭");
     }
 
-    /**
-     * 这货不会飞啊
-     */
-    public void fly() {
-        //覆盖，变成什么事都不做
+    public static void main(String[] args) {
+        Duck rubberDuck = new RubberDuck();
+        rubberDuck.performAll();
     }
+
 }
