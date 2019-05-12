@@ -1,4 +1,4 @@
-package com.thinkgem.jeesite.common.pattern.pattern1;
+package com.thinkgem.jeesite.common.pattern.strategy_plus;
 
 public class RedHeadDuck extends Duck {
 

@@ -1,4 +1,4 @@
-package com.thinkgem.jeesite.common.pattern.pattern1.behavior;
+package com.thinkgem.jeesite.common.pattern.strategy_plus.behavior;
 
 public interface FlyBehavior {
     /**

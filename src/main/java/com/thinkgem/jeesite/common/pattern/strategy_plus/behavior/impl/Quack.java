@@ -1,6 +1,6 @@
-package com.thinkgem.jeesite.common.pattern.pattern1.behavior.impl;
+package com.thinkgem.jeesite.common.pattern.strategy_plus.behavior.impl;
 
-import com.thinkgem.jeesite.common.pattern.pattern1.behavior.QuackBehavior;
+import com.thinkgem.jeesite.common.pattern.strategy_plus.behavior.QuackBehavior;
 
 public class Quack implements QuackBehavior {
     public void quack() {

@@ -1,7 +1,7 @@
-package com.thinkgem.jeesite.common.pattern.pattern1;
+package com.thinkgem.jeesite.common.pattern.strategy_plus;
 
-import com.thinkgem.jeesite.common.pattern.pattern1.behavior.FlyBehavior;
-import com.thinkgem.jeesite.common.pattern.pattern1.behavior.QuackBehavior;
+import com.thinkgem.jeesite.common.pattern.strategy_plus.behavior.FlyBehavior;
+import com.thinkgem.jeesite.common.pattern.strategy_plus.behavior.QuackBehavior;
 import lombok.Getter;
 import lombok.Setter;
 
