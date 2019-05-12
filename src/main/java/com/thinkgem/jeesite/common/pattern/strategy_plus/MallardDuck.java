@@ -3,24 +3,27 @@ package com.thinkgem.jeesite.common.pattern.strategy_plus;
 import com.thinkgem.jeesite.common.pattern.strategy_plus.behavior.impl.FlyWithWings;
 import com.thinkgem.jeesite.common.pattern.strategy_plus.behavior.impl.Quack;
 
-public class MallardDuck extends Duck{
+/**
+ * @Author duhongming
+ * @Email duhm@mydubang.com
+ * @Date 2019/5/2 20:33
+ * @Description 绿头鸭
+ */
+public class MallardDuck extends Duck {
 
     public MallardDuck() {
-        quackBehavior = new Quack();
-        flyBehavior = new FlyWithWings();
+        super();
+        super.setFlyBehavior(new FlyWithWings());
+        super.setQuackBehavior(new Quack());
     }
 
-    public void swim() {
-
-    }
-
+    @Override
     public void display() {
         System.out.println("外观是绿头");
     }
 
     public static void main(String[] args) {
         Duck mallardDuck = new MallardDuck();
-        mallardDuck.performQuack();
-        mallardDuck.performFly();
+        mallardDuck.performAll();
     }
 }

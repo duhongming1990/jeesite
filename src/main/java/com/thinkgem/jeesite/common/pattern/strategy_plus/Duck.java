@@ -4,7 +4,12 @@ import com.thinkgem.jeesite.common.pattern.strategy_plus.behavior.FlyBehavior;
 import com.thinkgem.jeesite.common.pattern.strategy_plus.behavior.QuackBehavior;
 import lombok.Getter;
 import lombok.Setter;
-
+/**
+ * @Author duhongming
+ * @Email duhm@mydubang.com
+ * @Date 2019/5/2 20:42
+ * @Description 
+ */
 @Getter
 @Setter
 public abstract class Duck {
@@ -12,8 +17,8 @@ public abstract class Duck {
     /**
      * default：内部类和本包访问，子类和外部包不能访问
      */
-    FlyBehavior flyBehavior;
-    QuackBehavior quackBehavior;
+    private FlyBehavior flyBehavior;
+    private QuackBehavior quackBehavior;
 
     /**
      * 外观
@@ -40,6 +45,11 @@ public abstract class Duck {
     public void performQuack(){
         quackBehavior.quack();
     }
-
-
+    
+    public void performAll(){
+        display();
+        swim();
+        performQuack();
+        performFly();
+    }
 }
