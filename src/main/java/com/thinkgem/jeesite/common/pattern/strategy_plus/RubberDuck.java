@@ -1,7 +1,8 @@
 package com.thinkgem.jeesite.common.pattern.strategy_plus;
 
-import com.thinkgem.jeesite.common.pattern.pattern1.behavior.impl.FlyNoWay;
-import com.thinkgem.jeesite.common.pattern.pattern1.behavior.impl.Squeak;
+
+import com.thinkgem.jeesite.common.pattern.strategy_plus.behavior.impl.FlyNoWay;
+import com.thinkgem.jeesite.common.pattern.strategy_plus.behavior.impl.Squeak;
 
 /**
  * @Author duhongming

@@ -1,11 +1,10 @@
 package com.thinkgem.jeesite.common.pattern.singleton;
 
 /**
- * 枚举单例模式
- * 终极解决方案，请使用！
- * @Author duhongming
- * @Email 19919902414@189.cn
- * @Date 2018/6/28 16:57
+ * @author duhongming
+ * @version 1.0
+ * @description 枚举单例模式、终极解决方案，请使用！
+ * @date 2019-09-13 09:42
  */
 public class EnumSingletonPattern {
 
