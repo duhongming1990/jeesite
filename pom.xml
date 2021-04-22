@@ -18,7 +18,7 @@
 		<!-- main version setting -->
 		<validator.version>5.2.4.Final</validator.version>
 		<spring.version>4.1.9.RELEASE</spring.version>
-		<mybatis.version>3.2.8</mybatis.version>
+		<mybatis.version>3.5.6</mybatis.version>
 		<mybatis-spring.version>1.2.3</mybatis-spring.version>
 
 		<druid.version>1.1.10</druid.version><!-- https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98 -->
